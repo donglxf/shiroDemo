@@ -1,0 +1,28 @@
+spring:
+  ### 数据库配置      Ai@csg   172.16.123.28    Admin#123
+  datasource:
+    url: jdbc:mysql://${DATABASE_ADDRESS:localhost:3306}/${DATABASE_NAME:test}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false&useAffectedRows=true&allowMultiQueries=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    url: jdbc:oracle:thin:@localhost:1521:data
+    #    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:dong}
+    # hikari配置
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: Labelpad-HikariCP
+      auto-commit: true
+      connection-timeout: 30000
+      idle-timeout: 7200
+      max-lifetime: 7200
+      maximum-pool-size: 10
+  jpa:
+    show-sql: true
+
+mybatis-plus:
+  configuration:
+    ## 控制台输出sql，调试用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath*:/mapper/**/*Mapper.xml
+  type-aliases-package:  cn.csg.aipc.dto;cn.csg.aipc.entity

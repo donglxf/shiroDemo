@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>显示后台值--<span data-th-text="${back=='后台'} ?: 'youx' ">dddd</span></div>
+<div>内联表达式--<span >[[${back}]]</span></div>
+<p th:text="@{http://www.baidu.com}">asdf</p>
+<p th:text="@{/css/com.js}">asdf</p>
+<p th:text="${#ctx.getVariable('back')}"></p>
+<p th:text="|Welcome to ${#ctx.getVariable('back')}!|"></p>
+<a th:href="@{http://www.baidu.com}" th:text="百度" target="_blank"></a><br/>
+<input type="checkbox" name="rememberme" th:checked="${rememberme}" th:if="${rememberme}" th:text="记住我"/>
+<div>循环显示后台值：</div>
+<table>
+    <tr th:each="item ,status: ${list}">
+        <td th:text="${item.userName}" th:item-index="${status.index}"></td>
+        <td th:text="${item.pwd}"></td>
+    </tr>
+</table>
+<p th:text="switch的使用"></p>
+<div th:switch="${swt}">
+    <span th:case="admin" th:text="admin"></span>
+    <span th:case="role" th:text="role"></span>
+</div>
+
+
+<form action="/ajaxSave" method="post" id="frm">
+    <input type="text" name="userName">
+    <input type="text" name="pwd">
+    <input type="submit" value="提交" id="sub">
+</form>
+
+<form action="/logout" method="post" id="frsm">
+    <input type="submit" value="logout" id="logout">
+</form>
+</body>
+</html>
