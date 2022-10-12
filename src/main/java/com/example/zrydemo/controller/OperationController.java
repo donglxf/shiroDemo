@@ -11,6 +11,7 @@ import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
@@ -50,7 +51,7 @@ public class OperationController {
         out.close();
     }
 
-    @PostMapping("/ajaxSave")
+    @PostMapping("/test")
     @ResponseBody
     @RequiresPermissions({"userInfo:add"}) // 权限管理.
     public String save(Model model, TestDto dto) throws JsonProcessingException {
@@ -68,6 +69,24 @@ public class OperationController {
         return json;
     }
 
+    @PostMapping("/test1")
+    @ResponseBody
+    @RequiresPermissions({"userInfo:add"}) // 权限管理.
+    public String test1(Model model, TestDto dto) throws JsonProcessingException {
+        String json = JSONObject.toJSONString(dto);
+        System.out.println(json + "======test1");
+//        String[] a=new String[2];
+//        System.out.println(a[3]);
+//        int ab=9/0;
+        TestDto testDto = new TestDto();
+        testDto.setUserName("dfsdd");
+        testDto.setPwd("qps");
+        ObjectMapper objectMapper = new ObjectMapper();
+        System.out.println(objectMapper.writeValueAsString(testDto) + "======test1");
+        model.addAttribute("test", "df");
+        return json;
+    }
+
     @RequestMapping("/regedit")
     @ResponseBody
     public String regedit(UserInfo dto) throws JsonProcessingException {
@@ -76,6 +95,7 @@ public class OperationController {
         String hashedPwd = sh.toHex();
         dto.setPassword(hashedPwd);
         userInfoMapper.insert(dto);
+
         return "success";
     }
 

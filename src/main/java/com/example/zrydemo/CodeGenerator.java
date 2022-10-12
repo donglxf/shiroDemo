@@ -9,9 +9,17 @@ import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import com.example.zrydemo.entity.UserInfo;
+import sun.misc.BASE64Encoder;
 
+import javax.activation.MimetypesFileTypeMap;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.FileNameMap;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class CodeGenerator {
@@ -34,7 +42,25 @@ public class CodeGenerator {
         throw new MybatisPlusException("请输入正确的" + tip + "！");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
+//        String source="/data/ai-panle";
+//        String target="/panel/detail";
+//        System.out.println("/data/ai-panle/aa/bb/cc.jpg".replace(source+"/",target));
+
+
+
+
+        String source="d:\\abc\\csd";
+        String target="c:\\aa\bb";
+        System.out.println("d:\\abc\\csd\\aa\\bb\\cc.jpg".replace(source+"\\",target));
+        FileNameMap fileNameMap = URLConnection.getFileNameMap();
+        String type =new MimetypesFileTypeMap().getContentType("C:\\Users\\zx\\Pictures\\Camera Roll\\00000.jpg");
+//        String type = fileNameMap.getContentTypeFor("C:\\zx_doc\\dfs.doc");
+        System.out.println(type);
+    }
+
+    public static void mains(String[] args) {
+
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
 
